@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.resolve.alias['@'] = __dirname;
-    return config;
+  swcMinify: true,
+  images: {
+    domains: ['fuse-4ad00.web.app'],
   },
 }
 
