@@ -45,7 +45,7 @@ export default function Dashboard() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`)
+        throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
       }
 
       if (data.error) {
@@ -112,17 +112,13 @@ export default function Dashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center space-y-4">
-          <div className="text-red-500 text-2xl font-bold animate-pulse tracking-wider">
-            Error: {error}
+          <div className="text-red-500 text-2xl font-bold tracking-wider">
+            {error}
           </div>
-          {dashboardData && (
-            <div className="text-gray-400">
-              Last successful update: {new Date(dashboardData.lastUpdate).toLocaleString()}
-            </div>
-          )}
           <button
             onClick={() => {
               setRetryCount(0)
+              setError(null)
               fetchData()
             }}
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
